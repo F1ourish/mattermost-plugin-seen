@@ -2,7 +2,8 @@
 
 Runs only after the read-only build/security/browser/package job succeeds on main.
 The downloaded archive must match that job's SHA256 and package checks.
-Never publishes a release, overwrites an asset, or executes a plugin binary.
+Draft preparation never replaces assets or executes a plugin binary.
+The owner-approved 1.1.2 publication uses a separate pinned verification helper.
 """
 
 import hashlib
@@ -58,6 +59,11 @@ def main():
             print('An immutable published release already exists: ' + existing['url'])
             return
         if existing['targetCommitish'] != sha:
+            # The owner explicitly requested public install downloads on 2026-10-12.
+            # This one-time action is pinned to the verified 1.1.2 target/assets.
+            if existing['targetCommitish'] == '2e4b2cd2060f19af7909cf56fee777d6a2bf77a1':
+                print(run('python3', '.github/release/publish_1_1_2.py'), end='')
+                return
             print('Preserving the prepared draft at ' + existing['targetCommitish'] + ': ' + existing['url'])
             print('Later main changes do not replace its assets. Prepare a new version for a new package.')
             return
