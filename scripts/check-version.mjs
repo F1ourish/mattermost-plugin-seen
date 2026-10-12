@@ -1,0 +1,12 @@
+import {readFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url)));
+const manifest = read('../plugin.json');
+const pkg = read('../webapp/package.json');
+const lock = read('../webapp/package-lock.json');
+assert.equal(manifest.id, 'ru.internal.mattermost.seen');
+assert.match(manifest.version, /^\d+\.\d+\.\d+(?:-[\w.]+)?$/);
+assert.equal(pkg.version, manifest.version);
+assert.equal(lock.version, manifest.version);
+assert.equal(lock.packages[''].version, manifest.version);
+console.log(manifest.version);

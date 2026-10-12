@@ -1,0 +1,1 @@
+Mattermost plugin for viewport-based message view receipts, with author-only viewer lists, first-view timestamps and compact double-check indicators.

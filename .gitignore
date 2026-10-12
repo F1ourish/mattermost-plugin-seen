@@ -1,0 +1,14 @@
+# Generated output and dependencies
+/node_modules/
+/webapp/node_modules/
+/dist/
+/webapp/dist/
+/server/dist/
+# Local credentials and diagnostics
+.env
+.env.*
+!.env.example
+*.log
+*.har
+coverage/
+.DS_Store

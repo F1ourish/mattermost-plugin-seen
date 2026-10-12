@@ -1,0 +1,30 @@
+{
+  "name": "mattermost-seen-webapp",
+  "version": "1.1.1",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test src/*.test.ts",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "lint": "eslint src --max-warnings 0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@mattermost/types": "11.9.0",
+    "@types/node": "24.10.1",
+    "@types/react": "18.3.27",
+    "@types/react-dom": "18.3.7",
+    "esbuild": "0.25.12",
+    "eslint": "10.11.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "playwright": "1.62.1",
+    "prettier": "3.6.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.0"
+  },
+  "type": "module"
+}

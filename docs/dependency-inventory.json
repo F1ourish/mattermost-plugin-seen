@@ -1,0 +1,344 @@
+[
+  {
+    "module": "github.com/Masterminds/semver/v3",
+    "version": "v3.5.0",
+    "notices": [
+      "third-party/github.com_Masterminds_semver_v3/LICENSE.txt"
+    ]
+  },
+  {
+    "module": "github.com/beevik/etree",
+    "version": "v1.7.1",
+    "notices": [
+      "third-party/github.com_beevik_etree/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/dyatlov/go-opengraph/opengraph",
+    "version": "v0.0.0-20220524092352-606d7b1e5f8a",
+    "notices": [
+      "third-party/github.com_dyatlov_go-opengraph_opengraph/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fatih/color",
+    "version": "v1.19.0",
+    "notices": [
+      "third-party/github.com_fatih_color/LICENSE.md"
+    ]
+  },
+  {
+    "module": "github.com/francoispqt/gojay",
+    "version": "v1.2.13",
+    "notices": [
+      "third-party/github.com_francoispqt_gojay/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-asn1-ber/asn1-ber",
+    "version": "v1.5.8",
+    "notices": [
+      "third-party/github.com_go-asn1-ber_asn1-ber/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/goccy/go-yaml",
+    "version": "v1.19.2",
+    "notices": [
+      "third-party/github.com_goccy_go-yaml/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/golang/protobuf",
+    "version": "v1.5.4",
+    "notices": [
+      "third-party/github.com_golang_protobuf/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/google/uuid",
+    "version": "v1.6.0",
+    "notices": [
+      "third-party/github.com_google_uuid/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/gorilla/websocket",
+    "version": "v1.5.3",
+    "notices": [
+      "third-party/github.com_gorilla_websocket/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hashicorp/errwrap",
+    "version": "v1.1.0",
+    "notices": [
+      "third-party/github.com_hashicorp_errwrap/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hashicorp/go-hclog",
+    "version": "v1.6.3",
+    "notices": [
+      "third-party/github.com_hashicorp_go-hclog/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hashicorp/go-multierror",
+    "version": "v1.1.1",
+    "notices": [
+      "third-party/github.com_hashicorp_go-multierror/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hashicorp/go-plugin",
+    "version": "v1.8.0",
+    "notices": [
+      "third-party/github.com_hashicorp_go-plugin/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hashicorp/yamux",
+    "version": "v0.1.2",
+    "notices": [
+      "third-party/github.com_hashicorp_yamux/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/jonboulle/clockwork",
+    "version": "v0.5.0",
+    "notices": [
+      "third-party/github.com_jonboulle_clockwork/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/lib/pq",
+    "version": "v1.12.3",
+    "notices": [
+      "third-party/github.com_lib_pq/LICENSE",
+      "third-party/github.com_lib_pq/notice.go",
+      "third-party/github.com_lib_pq/notice_test.go"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/go-i18n",
+    "version": "v1.11.1-0.20211013152124-5c415071e404",
+    "notices": [
+      "third-party/github.com_mattermost_go-i18n/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/gosaml2",
+    "version": "v0.10.0",
+    "notices": [
+      "third-party/github.com_mattermost_gosaml2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/ldap",
+    "version": "v0.0.0-20231116144001-0f480c025956",
+    "notices": [
+      "third-party/github.com_mattermost_ldap/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/logr/v2",
+    "version": "v2.0.22",
+    "notices": [
+      "third-party/github.com_mattermost_logr_v2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/mattermost/server/public",
+    "version": "v0.4.4",
+    "notices": [
+      "third-party/github.com_mattermost_mattermost_server_public/LICENSE.txt"
+    ]
+  },
+  {
+    "module": "github.com/mattermost/xml-roundtrip-validator",
+    "version": "v0.1.0",
+    "notices": [
+      "third-party/github.com_mattermost_xml-roundtrip-validator/LICENSE.txt"
+    ]
+  },
+  {
+    "module": "github.com/mattn/go-colorable",
+    "version": "v0.1.15",
+    "notices": [
+      "third-party/github.com_mattn_go-colorable/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mattn/go-isatty",
+    "version": "v0.0.24",
+    "notices": [
+      "third-party/github.com_mattn_go-isatty/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/oklog/run",
+    "version": "v1.2.0",
+    "notices": [
+      "third-party/github.com_oklog_run/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/pborman/uuid",
+    "version": "v1.2.1",
+    "notices": [
+      "third-party/github.com_pborman_uuid/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/pelletier/go-toml",
+    "version": "v1.9.5",
+    "notices": [
+      "third-party/github.com_pelletier_go-toml/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/philhofer/fwd",
+    "version": "v1.2.0",
+    "notices": [
+      "third-party/github.com_philhofer_fwd/LICENSE.md"
+    ]
+  },
+  {
+    "module": "github.com/pkg/errors",
+    "version": "v0.9.1",
+    "notices": [
+      "third-party/github.com_pkg_errors/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/russellhaering/goxmldsig",
+    "version": "v1.6.1",
+    "notices": [
+      "third-party/github.com_russellhaering_goxmldsig/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/stretchr/testify",
+    "version": "v1.12.1",
+    "notices": [
+      "third-party/github.com_stretchr_testify/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/tinylib/msgp",
+    "version": "v1.6.4",
+    "notices": [
+      "third-party/github.com_tinylib_msgp/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/vmihailenco/msgpack/v5",
+    "version": "v5.4.1",
+    "notices": [
+      "third-party/github.com_vmihailenco_msgpack_v5/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/vmihailenco/tagparser/v2",
+    "version": "v2.0.0",
+    "notices": [
+      "third-party/github.com_vmihailenco_tagparser_v2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/wiggin77/merror",
+    "version": "v1.0.5",
+    "notices": [
+      "third-party/github.com_wiggin77_merror/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/wiggin77/srslog",
+    "version": "v1.0.1",
+    "notices": [
+      "third-party/github.com_wiggin77_srslog/LICENSE"
+    ]
+  },
+  {
+    "module": "go.yaml.in/yaml/v3",
+    "version": "v3.0.5",
+    "notices": [
+      "third-party/go.yaml.in_yaml_v3/LICENSE",
+      "third-party/go.yaml.in_yaml_v3/NOTICE"
+    ]
+  },
+  {
+    "module": "golang.org/x/crypto",
+    "version": "v0.57.0",
+    "notices": [
+      "third-party/golang.org_x_crypto/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/mod",
+    "version": "v0.41.0",
+    "notices": [
+      "third-party/golang.org_x_mod/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/net",
+    "version": "v0.60.0",
+    "notices": [
+      "third-party/golang.org_x_net/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/sys",
+    "version": "v0.48.0",
+    "notices": [
+      "third-party/golang.org_x_sys/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/text",
+    "version": "v0.42.0",
+    "notices": [
+      "third-party/golang.org_x_text/LICENSE"
+    ]
+  },
+  {
+    "module": "google.golang.org/genproto/googleapis/rpc",
+    "version": "v0.0.0-20260819154853-08b0e4226688",
+    "notices": [
+      "third-party/google.golang.org_genproto_googleapis_rpc/LICENSE"
+    ]
+  },
+  {
+    "module": "google.golang.org/grpc",
+    "version": "v1.83.2",
+    "notices": [
+      "third-party/google.golang.org_grpc/LICENSE",
+      "third-party/google.golang.org_grpc/NOTICE.txt"
+    ]
+  },
+  {
+    "module": "google.golang.org/protobuf",
+    "version": "v1.36.12",
+    "notices": [
+      "third-party/google.golang.org_protobuf/LICENSE"
+    ]
+  },
+  {
+    "module": "gopkg.in/natefinch/lumberjack.v2",
+    "version": "v2.2.1",
+    "notices": [
+      "third-party/gopkg.in_natefinch_lumberjack.v2/LICENSE"
+    ]
+  },
+  {
+    "module": "gopkg.in/yaml.v2",
+    "version": "v2.4.0",
+    "notices": [
+      "third-party/gopkg.in_yaml.v2/LICENSE",
+      "third-party/gopkg.in_yaml.v2/LICENSE.libyaml",
+      "third-party/gopkg.in_yaml.v2/NOTICE"
+    ]
+  }
+]

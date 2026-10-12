@@ -1,0 +1,2 @@
+import {build} from 'esbuild';
+await build({entryPoints:['src/index.tsx'],bundle:true,minify:true,format:'iife',target:['chrome110','firefox115'],outfile:'dist/main.js',legalComments:'eof',plugins:[{name:'mattermost-host-react',setup(b){b.onResolve({filter:/^react(-dom)?$/},a=>({path:a.path,namespace:'host'}));b.onLoad({filter:/.*/,namespace:'host'},a=>({contents:`module.exports = window.${a.path==='react'?'React':'ReactDOM'};`,loader:'js'}));}}]});

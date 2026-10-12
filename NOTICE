@@ -1,0 +1,9 @@
+Mattermost Seen — internal read receipt plugin.
+Licensed under Apache License 2.0.
+The minimal server/main.go entry point and host-external React build convention
+are derived from the Mattermost plugin starter template:
+https://github.com/mattermost/mattermost-plugin-starter-template
+Commit: 3296cf6fad808c2372c254cf7b64bcc8a2144e67
+Copyright (c) 2015-present Mattermost, Inc.
+Receipt logic is newly written. No receipt code from viewer-avatars or mention-read-receipts is incorporated.
+Third-party Go and npm packages retain their respective licenses.
