@@ -50,14 +50,14 @@ The server authenticates plugin requests using the identity supplied by the Matt
 
 Open System Console → Plugins and the Seen settings page (the exact menu grouping depends on the Mattermost build). Settings are declared in the plugin manifest; use System Console rather than editing receipt storage.
 
-- **Retention days (`RetentionDays`)**: integer 1–365, default 90, measured from message creation.
+- **Retention days (`RetentionDays`)**: integer 1-365, default 90, measured from message creation.
 - **Public channels (`EnablePublic`)**: default enabled; membership/read permissions remain required.
 
 Save and reopen the page to confirm persistence, then verify behavior using test accounts. Configuration reload is handled by the plugin. A read-only server configuration may prevent saving; use your deployment's configuration process in that case. Invalid retention values must not become the active plugin configuration.
 
 ## Retention and limits
 
-- `RetentionDays`: default 90, accepted range 1–365, calculated from message creation.
+- `RetentionDays`: default 90, accepted range 1-365, calculated from message creation.
 - `EnablePublic`: controls collection in public channels; membership is still required.
 - Maximum 5,000 stored viewers per message; a saturated list may be incomplete.
 - Client delivery queue: up to 500 pending/deferred IDs for up to 10 minutes; caches have separate bounds.
