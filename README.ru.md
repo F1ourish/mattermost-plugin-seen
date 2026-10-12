@@ -13,9 +13,9 @@ Plugin ID: `ru.internal.mattermost.seen`. Идентификатор сохра�
 
 ## Статус и совместимость
 
-Версия **1.1.1** - совместимый security patch для Go toolchain и зависимостей. Сохраняется UI 1.1.0: preview до пяти пользователей и отдельное окно полного списка.
+Версия **1.1.2** включает актуальные русский и английский README и релизную документацию. Сохранены security fixes 1.1.1 и UI 1.1.0: preview до пяти пользователей и отдельное окно полного списка. Код backend/frontend, зависимости, формат receipts и viewport-правила не меняются.
 
-Репозиторий публичный, draft pre-release подготовлен 12.10.2026. Draft привязан к проверенному commit `82bdcdc952767cdb017ab55720a123b8e96f7cd6`; последующие изменения документации в `main` не заменяют его файлы. Пакеты станут публично доступны в [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) после публикации релиза. См. [проверку оформления репозитория](docs/repository-review-2026-10-12.md).
+CI готовит неопубликованный draft pre-release из exact commit, прошедшего build, browser, security и package gates. В комплект входят install-архив, source ZIP, отчёт проверки пакета и SHA256. Существующие assets сохраняются; следующие изменения требуют новой версии. Пакеты станут публично доступны в [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) после публикации релиза. См. [проверку оформления репозитория](docs/repository-review-2026-10-12.md).
 
 Кандидат предназначен для приёмки на тестовом контуре. Проверки реального Mattermost gateway, прав доступа, CSRF и функциональной приёмки требуются перед рекомендацией production. Поддержка HA должна быть подтверждена отдельным app1/app2, failover и нагрузочным прогоном. Номер версии не является сертификатом безопасности.
 
@@ -48,19 +48,19 @@ Plugin ID: `ru.internal.mattermost.seen`. Идентификатор сохра�
 
 Выполнять на выбранном тестовом контуре. До изменения записать текущую версию и настройки, проверить штатные login/messages и актуальность backup, сохранить предыдущий пакет для диагностики. На время отключения Seen отсутствуют его индикаторы и сбор новых отметок.
 
-1. Скачать `ru.internal.mattermost.seen-1.1.1.tar.gz` и проверить SHA256. Source ZIP не является установочным пакетом.
+1. Скачать `ru.internal.mattermost.seen-1.1.2.tar.gz` и проверить SHA256. Source ZIP не является установочным пакетом.
 2. Отключить Seen через System Console. При нескольких app-нодах согласовать обновление всех нод; не смешивать writers 1.0.0 с версиями, поддерживающими tombstones.
-3. Загрузить tar.gz через управление плагинами как обновление существующего ID. Проверить версию 1.1.1 и результат upload/activation; при неясном результате сверить список плагинов и логи по времени операции.
+3. Загрузить tar.gz через управление плагинами как обновление существующего ID. Проверить версию 1.1.2 и результат upload/activation; при неясном результате сверить список плагинов и логи по времени операции.
 4. Проверить сохранение RetentionDays/EnablePublic, включить плагин, перезагрузить Web/Desktop clients и подтвердить одинаковую версию на app-нодах.
 5. Проверить поведение минимум с двумя тестовыми пользователями: отказ доступа, повтор, reconnect, обе темы и используемые layouts. Для полной матрицы T01-T35 использовать [инструкцию тестирования](docs/testing.md).
 
-Для GitHub draft подготовлен `SHA256SUMS-1.1.1-github.txt`. При обоих скачанных assets рядом с файлом сумм на Linux:
+Для GitHub draft подготовлен `SHA256SUMS-1.1.2-github.txt`. При обоих скачанных assets рядом с файлом сумм на Linux:
 
 ```sh
-sha256sum -c SHA256SUMS-1.1.1-github.txt
+sha256sum -c SHA256SUMS-1.1.2-github.txt
 ```
 
-Ожидается `OK` для install-архива и source ZIP, exit 0. Если скачан только tar.gz, сверить именно его сумму со строкой checksum file; общий check иначе сообщит о недостающем source ZIP.
+Ожидается `OK` для install-архива, source ZIP и `release-validation-1.1.2.json`, exit 0. Если скачан только tar.gz, сверить именно его сумму со строкой checksum file; общий check иначе сообщит о недостающих assets.
 
 Миграция системной DB schema не требуется. Существующие отметки читаются в прежнем формате; tombstone добавляет optional marker в Plugin KV. При security rollback отключить Seen до появления совместимого fixed package. Возврат к 1.1.0 возвращает dependency advisories; KV не удаляется как штатный шаг rollback. Подробнее: [эксплуатационный ранбук](docs/operations.md).
 
@@ -115,7 +115,7 @@ Per-user limiter допускает 2 requests/sec и burst 120 на один п
 ## Документация и участие
 
 - [Оглавление документации](docs/README.md), [архитектура](docs/architecture.md), [API](docs/api.md), [приватность](docs/privacy.md).
-- [Эксплуатация](docs/operations.md), [тестирование](docs/testing.md), [release notes 1.1.1](docs/release-1.1.1.md), [готовность релиза](docs/release-readiness.md).
+- [Эксплуатация](docs/operations.md), [тестирование](docs/testing.md), [релиз 1.1.2](docs/release-1.1.2.md), [security patch 1.1.1](docs/release-1.1.1.md), [готовность релиза](docs/release-readiness.md).
 - [Текущее оформление GitHub](docs/repository-review-2026-10-12.md), [процесс выпуска](docs/release-process.md), [участие в разработке](CONTRIBUTING.md), [CHANGELOG](CHANGELOG.md).
 
 Баги и предложения принимаются через [Issues](https://github.com/F1ourish/mattermost-plugin-seen/issues). Использовать synthetic data; credentials, реальные сообщения, viewers и production identifiers в публичные обращения не добавлять. Потенциальные уязвимости сообщать по [SECURITY.md](SECURITY.md).

@@ -13,15 +13,15 @@ Plugin ID: `ru.internal.mattermost.seen`. The ID is retained for installation an
 
 ## Release status
 
-Version 1.1.1 is a security patch for the Go toolchain and affected dependencies. It retains the five-viewer preview and full-list dialog introduced in 1.1.0. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
+Version 1.1.2 packages the current English and Russian README and release documentation. It retains the security fixes from 1.1.1 and the five-viewer preview and full-list dialog from 1.1.0. Backend/frontend runtime code, dependencies, receipt storage and viewport rules are unchanged. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
 
-The public repository and a draft pre-release were prepared on 2026-10-12. The draft is tied to verified commit `82bdcdc952767cdb017ab55720a123b8e96f7cd6`; later documentation changes in `main` do not replace its assets. Packages become publicly downloadable from [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) after publication. See the [repository review](docs/repository-review-2026-10-12.md) for current repository settings and remaining checks.
+CI prepares an unpublished draft pre-release from the exact commit that passes the build, browser, security and package gates. It includes the install archive, source ZIP, package-validation report and SHA256 checksums. Existing release assets are preserved; later changes require a new version. Packages become publicly downloadable from [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) after publication. See the [repository review](docs/repository-review-2026-10-12.md) for current repository settings and remaining checks.
 
 Target server: Mattermost 11.10.x; manifest minimum: 11.10.0. Server executables are supplied for Linux amd64 and arm64. Other server versions require validation. Mobile receipt collection and Connected Workspaces receipt synchronization are not supported.
 
 ## Project documentation
 
-See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.1 release notes](docs/release-1.1.1.md) for the security update and installation checks, and [1.1.0 release notes](docs/release-1.1.0.md) for the existing UI. The [2026-10-01 review](docs/release-readiness-1.0.3.md) remains a historical baseline; its scans are not the current dependency status.
+See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.2 release notes](docs/release-1.1.2.md) for this package and installation checks, [1.1.1 release notes](docs/release-1.1.1.md) for the security update, and [1.1.0 release notes](docs/release-1.1.0.md) for the existing UI. The [2026-10-01 review](docs/release-readiness-1.0.3.md) remains a historical baseline; its scans are not the current dependency status.
 
 ## Features
 
@@ -72,8 +72,8 @@ Message deletion replaces the receipt document with a durable tombstone containi
 ## Installation and upgrade
 
 1. Back up the previous plugin package and settings; follow your deployment's data backup policy.
-2. Verify the supplied SHA256 checksum and server architecture.
-3. Upload `ru.internal.mattermost.seen-1.1.1.tar.gz` through System Console plugin management as an update of the same plugin ID.
+2. Verify the supplied `SHA256SUMS-1.1.2-github.txt` checksums and server architecture.
+3. Upload `ru.internal.mattermost.seen-1.1.2.tar.gz` through System Console plugin management as an update of the same plugin ID.
 4. Confirm the displayed version, enabled state and settings. Reload clients.
 5. Validate with at least two test users before enabling wider use. Test denied access, duplicate views, offline/reconnect, both themes and the layouts you use.
 

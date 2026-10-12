@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2] - 2026-10-12
+
+- Packaged the current Russian and English README, documentation links and release/operations guidance; README typography uses ordinary hyphens.
+- Added archive validation for ID/version, safe member paths, required documentation, relative links and executable permissions.
+- Compare both packaged Linux binaries and the web bundle with the verified 1.1.1 hashes to guard against unintended runtime changes.
+- Draft preparation verifies the install artifact against the SHA256 produced by the successful read-only CI job and attaches a package-validation report.
+- Retained the 1.1.1 dependency fixes, plugin ID, receipt API/KV format, first-view timestamp and viewport rules. Live Mattermost and HA acceptance remain pending.
+
 ## [1.1.1] — 2026-10-11
 
 - Updated the release compiler from Go 1.26.7 to 1.26.9 and golang.org/x/net from 0.58.0 to 0.60.0 to address the fixable advisories found in the 2026-10-10 review.

@@ -14,7 +14,7 @@ If private reporting is unavailable, request a private reporting channel without
 
 ## Supported scope
 
-Version 1.1.1 updates the release compiler to Go 1.26.9 and golang.org/x/net to 0.60.0, addressing the fixable dependency advisories identified in the 2026-10-10 review. Earlier packages built with Go 1.26.7/x/net 0.58.0 should be replaced with a validated fixed package. Historical code and documentation reviews do not claim live gateway or HA acceptance. See [release readiness](docs/release-readiness.md) and [security patch notes](docs/release-1.1.1.md). A long-term support policy and patch response timeline have not been established. Review status is not a guarantee that all vulnerabilities have been found.
+Version 1.1.2 retains the runtime and dependency fixes of 1.1.1. The 1.1.1 security patch updated the release compiler to Go 1.26.9 and golang.org/x/net to 0.60.0, addressing the fixable dependency advisories identified in the 2026-10-10 review. Earlier packages built with Go 1.26.7/x/net 0.58.0 should be replaced with a validated fixed package. Historical code and documentation reviews do not claim live gateway or HA acceptance. See [release readiness](docs/release-readiness.md) and [security patch notes](docs/release-1.1.1.md). A long-term support policy and patch response timeline have not been established. Review status is not a guarantee that all vulnerabilities have been found.
 
 Security-relevant behavior includes:
 
