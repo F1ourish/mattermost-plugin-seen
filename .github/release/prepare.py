@@ -72,7 +72,9 @@ def main():
             print('An immutable published release already exists: ' + existing['url'])
             return
         if existing['targetCommitish'] != sha:
-            raise RuntimeError('A draft for this version belongs to another commit; preserve it and use a new release version.')
+            print('Preserving the prepared draft at ' + existing['targetCommitish'] + ': ' + existing['url'])
+            print('Later main changes do not replace its assets. Prepare a new version for a new package.')
+            return
     elif 'not found' not in inspection.stderr.lower() and '404' not in inspection.stderr:
         raise RuntimeError('Cannot inspect existing release; ' + inspection.stderr.strip())
 

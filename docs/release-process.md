@@ -1,6 +1,6 @@
 # Подготовка GitHub и выпуск
 
-Дата 11.10.2026. Текущий кандидат 1.1.1. Это план действий и checklist, не подтверждение публикации. Репозиторий в этой сессии не создан, настройки GitHub не применены.
+Обновлено 12.10.2026. Текущий кандидат 1.1.1. Репозиторий `F1ourish/mattermost-plugin-seen` публичный; GitHub CI и draft pre-release на commit `82bdcdc952767cdb017ab55720a123b8e96f7cd6` подготовлены. Релиз остаётся draft, deployment не выполнялся. Текущие настройки и ограничения перечислены в [проверке репозитория](repository-review-2026-10-12.md).
 
 ## Два разных решения
 
@@ -13,7 +13,7 @@
 - [ ] Если публикуется существующая история, просканировать все branches/tags/history. В предоставленном source ZIP истории нет. Если это новый репозиторий из snapshot, проверить initial commit и любые добавленные файлы; не объявлять старую историю проверенной.
 - [ ] Проверить LICENSE/NOTICE/third-party, README, privacy и SECURITY. Назначить реального maintainer и канал приватных сообщений. Не подставлять выдуманный email.
 - [ ] Настроить private vulnerability reporting и проверить доступность Report a vulnerability. Включить доступные dependency/security alerts; права и доступность зависят от repository settings.
-- [ ] Ограничить push в основную ветку, требовать review/CI в выбранной политике репозитория. Read-only contents permission и pinned Actions уже в CI, фактический GitHub run ещё нужен.
+- [ ] Ограничить push в основную ветку, требовать PR/CI в выбранной политике репозитория. Read-only build и pinned Actions есть; GitHub run кандидата прошёл. Защита main и rulesets на момент проверки не включены.
 
 ## Релиз
 
@@ -43,4 +43,4 @@ gitleaks git . --redact --log-opts="--all"
 
 Module-only GO-2026-5932 не подавлять глобальной allowlist: OpenPGP не входит в compiled dependency list. Сопоставлять source scan, binary symbols и результаты конкретного package checksum; после новых зависимостей переснять оценку. Binaries без symbol table могут давать консервативные module fallback findings, поэтому 1.1.1 сохраняет symbols для анализа.
 
-Публикация и deployment остаются отдельными действиями владельца; они не выполнены этим комплектом.
+Исходники опубликованы; draft не опубликован как GitHub release и deployment не выполнен. Assets кандидата остаются привязаны к проверенному commit. Последующие изменения документации в main не перезаписывают их; для нового install-пакета назначить следующий patch и новые суммы.

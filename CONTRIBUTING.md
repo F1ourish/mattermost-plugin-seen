@@ -1,6 +1,6 @@
 # Contributing
 
-This project targets Mattermost 11.10.x. See [architecture](docs/architecture.md), [API](docs/api.md), [testing](docs/testing.md) and [release process](docs/release-process.md). Operational documentation is currently in Russian; the project README and security policy are in English.
+This project targets Mattermost 11.10.x. See [architecture](docs/architecture.md), [API](docs/api.md), [testing](docs/testing.md) and [release process](docs/release-process.md). The project README is available in [English](README.md) and [Russian](README.ru.md); operational documentation is currently in Russian and the security policy is in English.
 
 Use synthetic data. Never attach real messages, viewer lists, cookies, tokens, internal hosts or production IDs to public issues or pull requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md).
 

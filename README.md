@@ -1,5 +1,10 @@
 # Seen for Mattermost
 
+English · [Русский](README.ru.md)
+
+[![CI](https://github.com/F1ourish/mattermost-plugin-seen/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/F1ourish/mattermost-plugin-seen/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 Author-only viewing receipts for Mattermost Web and Desktop.
 
 **“Viewed” means the message's observation marker entered the viewport under the conditions below. It does not mean a person read, understood, or even looked at the message.** An authenticated client can also submit a receipt for a message it is permitted to access. This is not proof of delivery or a human-read attestation.
@@ -9,6 +14,8 @@ Plugin ID: `ru.internal.mattermost.seen`. The ID is retained for installation an
 ## Release status
 
 Version 1.1.1 is a security patch for the Go toolchain and affected dependencies. It retains the five-viewer preview and full-list dialog introduced in 1.1.0. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
+
+The public repository and a draft pre-release were prepared on 2026-10-12. The draft is tied to verified commit `82bdcdc952767cdb017ab55720a123b8e96f7cd6`; later documentation changes in `main` do not replace its assets. Packages become publicly downloadable from [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) after publication. See the [repository review](docs/repository-review-2026-10-12.md) for current repository settings and remaining checks.
 
 Target server: Mattermost 11.10.x; manifest minimum: 11.10.0. Server executables are supplied for Linux amd64 and arm64. Other server versions require validation. Mobile receipt collection and Connected Workspaces receipt synchronization are not supported.
 
@@ -79,14 +86,8 @@ Build prerequisites: Linux, Go 1.26.9, Node.js 24.19.0, npm 11.9.0, Python 3, GN
 ```sh
 make dist
 make security-check
-make test
-make check
-npm --prefix webapp run lint
-npm --prefix webapp run format:check
-npm --prefix webapp audit
 webapp/node_modules/.bin/playwright install --with-deps chromium
 node scripts/browser-smoke.mjs
-go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -show verbose ./server
 ```
 
 `make security-check` requires the built archive and verifies module integrity, source dependencies, npm dependencies, and both packaged Linux binaries. Symbols are retained for precise artifact scanning; debug information and local source paths are omitted. Browser tests use a mock host; they are not live Mattermost integration tests. Semantic lint includes TypeScript and React hook rules, enforced by the build. Dependency scans do not prove the absence of all vulnerabilities.

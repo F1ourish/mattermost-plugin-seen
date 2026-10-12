@@ -1,8 +1,8 @@
 # Security policy
 
-## Publication prerequisite
+## Private reporting setup
 
-This is a prepared policy for a repository that has not yet been published by this audit. Before publication, maintainers must enable GitHub private vulnerability reporting and verify that **Security → Report a vulnerability** is available. No private contact address or response SLA is invented here.
+The source repository is public. Before publishing a release, maintainers must enable GitHub private vulnerability reporting and verify that **Security → Advisories → Report a vulnerability** is available. Enablement could not be independently confirmed in the 2026-10-12 repository review; see [the review](docs/repository-review-2026-10-12.md). No private contact address or response SLA is invented here.
 
 ## Reporting a vulnerability
 

@@ -27,6 +27,9 @@ for arch in amd64 arm64; do
     CGO_ENABLED=0 GOOS=linux GOARCH="$arch" go build -trimpath -buildvcs=false -ldflags='-w -buildid=' -o "$stage/server/dist/plugin-linux-$arch" ./server
 done
 cp plugin.json LICENSE NOTICE README.md "$stage/"
+if [[ -f README.ru.md ]]; then
+    cp README.ru.md "$stage/"
+fi
 mkdir -p "$stage/docs"
 cp docs/*.md docs/*.json docs/*.csv "$stage/docs/"
 cp SECURITY.md CHANGELOG.md AI_DISCLOSURE.md CONTRIBUTING.md "$stage/"

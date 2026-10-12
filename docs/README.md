@@ -1,6 +1,8 @@
 # Документация Seen
 
-Версия документации: 2. Дата: 11.10.2026. Текущая версия: 1.1.1; UI сохранён из 1.1.0. Статус: security patch candidate, live acceptance pending.
+Версия документации: 3. Дата: 12.10.2026. Код: 1.1.1; UI сохранён из 1.1.0. Статус: security patch candidate, live acceptance pending. Репозиторий публичный; draft pre-release подготовлен отдельно от последующих изменений документации.
+
+[Русский README](../README.ru.md) · [English README](../README.md) · [Проверка оформления репозитория](repository-review-2026-10-12.md).
 
 Seen добавляет автору сообщения сведения о попадании сообщения в область просмотра клиента. Это не доказательство прочтения человеком. Plugin ID сохраняется: `ru.internal.mattermost.seen`.
 

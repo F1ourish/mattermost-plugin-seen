@@ -8,6 +8,8 @@ After a successful build, browser smoke and security gate on this repository's `
 
 The draft contains the install tar.gz, a source ZIP from the exact commit (including these publication files), checksums and release notes. The helper does not click Publish, mark the release stable, change repository visibility, or deploy Mattermost. It is limited to version 1.1.1; future versions require their own reviewed release configuration.
 
+The prepared draft belongs to commit `82bdcdc952767cdb017ab55720a123b8e96f7cd6`. Later commits in `main` can update documentation and pass CI while preserving that draft. If the same version already has a draft at another commit, the helper skips asset changes. To include newer documentation in a distributable package, prepare a new patch version and review its new checksums; the earlier assets remain immutable.
+
 `about.txt` and `topics.json` contain the proposed About description and topics. Apply them through the repository's About editor. The selected GitHub plugin has no repository-description/topic mutation operation.
 
 Before publishing the draft, enable GitHub private vulnerability reporting and verify **Security → Advisories → Report a vulnerability**. Current plugin/docs do not establish that repository setting. Stable/HA support requires the live acceptance evidence documented in the project; leave unexecuted scenarios as NOT RUN.
