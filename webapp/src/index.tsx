@@ -89,6 +89,7 @@ const css = `
 .mmseen-panel.mmseen-full[open]{width:460px;max-height:min(640px,calc(100vh - 32px));display:flex;flex-direction:column;overflow:hidden;padding:14px}
 .mmseen-full .mmseen-heading{flex-shrink:0;padding-bottom:8px;border-bottom:1px solid rgba(var(--center-channel-color-rgb,63,67,80),.16)}
 .mmseen-full .mmseen-list{max-height:min(520px,65vh);min-height:0;flex:0 1 auto}
+.mmseen-scope{flex-shrink:0;margin:8px 0 0;padding-top:6px;border-top:1px solid rgba(var(--center-channel-color-rgb,63,67,80),.16);font-size:11px;line-height:16px;color:rgba(var(--center-channel-color-rgb,63,67,80),.75)}
 `;
 
 class SeenPlugin {
@@ -836,6 +837,9 @@ function ViewerContent({
         )}
         {page?.saturated && <small>{text("limit")}</small>}
       </>
+      <p className="mmseen-scope" role="note">
+        {text("clientScope")}
+      </p>
     </>
   );
 }

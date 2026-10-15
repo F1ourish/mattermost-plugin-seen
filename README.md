@@ -7,21 +7,23 @@ English · [Русский](README.ru.md)
 
 Author-only viewing receipts for Mattermost Web and Desktop.
 
+**Client coverage:** Only views from Web/Desktop are counted. Stock Mattermost iOS/Android apps do not load webapp plugins, so their views are not tracked. The absence of a viewer does not rule out reading in a mobile app.
+
 **“Viewed” means the message's observation marker entered the viewport under the conditions below. It does not mean a person read, understood, or even looked at the message.** An authenticated client can also submit a receipt for a message it is permitted to access. This is not proof of delivery or a human-read attestation.
 
 Plugin ID: `ru.internal.mattermost.seen`. The ID is retained for installation and data compatibility.
 
 ## Release status
 
-Version 1.1.2 packages the current English and Russian README and release documentation. It retains the security fixes from 1.1.1 and the five-viewer preview and full-list dialog from 1.1.0. Backend/frontend runtime code, dependencies, receipt storage and viewport rules are unchanged. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
+Version 1.1.3 adds a Web/Desktop-only scope note in both viewer panels and clarifies the plugin description and documentation. Backend code, dependencies, receipt storage and viewport rules are unchanged. It retains the security fixes and five-viewer preview/full-list dialog from earlier versions. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
 
-CI prepares an unpublished draft pre-release from the exact commit that passes the build, browser, security and package gates. It includes the install archive, source ZIP, package-validation report and SHA256 checksums. Existing release assets are preserved; later changes require a new version. Packages become publicly downloadable from [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) after publication. See the [repository review](docs/repository-review-2026-10-12.md) for current repository settings and remaining checks.
+CI builds and validates the exact commit with build, browser, security and package checks. Existing release assets are preserved; changed packages use a new version. The release-preparation helpers for 1.1.2 remain version-pinned and do not publish 1.1.3 automatically. See [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) for published packages and the [repository review](docs/repository-review-2026-10-12.md) for historical settings.
 
 Target server: Mattermost 11.10.x; manifest minimum: 11.10.0. Server executables are supplied for Linux amd64 and arm64. Other server versions require validation. Mobile receipt collection and Connected Workspaces receipt synchronization are not supported.
 
 ## Project documentation
 
-See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.2 release notes](docs/release-1.1.2.md) for this package and installation checks, [1.1.1 release notes](docs/release-1.1.1.md) for the security update, and [1.1.0 release notes](docs/release-1.1.0.md) for the existing UI. The [2026-10-01 review](docs/release-readiness-1.0.3.md) remains a historical baseline; its scans are not the current dependency status.
+See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.3 release notes](docs/release-1.1.3.md) for this package and installation checks, [1.1.1 release notes](docs/release-1.1.1.md) for the security update, and [1.1.0 release notes](docs/release-1.1.0.md) for the existing UI. The [2026-10-01 review](docs/release-readiness-1.0.3.md) remains a historical baseline; its scans are not the current dependency status.
 
 ## Features
 
@@ -72,8 +74,8 @@ Message deletion replaces the receipt document with a durable tombstone containi
 ## Installation and upgrade
 
 1. Back up the previous plugin package and settings; follow your deployment's data backup policy.
-2. Verify the supplied `SHA256SUMS-1.1.2-github.txt` checksums and server architecture.
-3. Upload `ru.internal.mattermost.seen-1.1.2.tar.gz` through System Console plugin management as an update of the same plugin ID.
+2. Verify the supplied `SHA256SUMS-1.1.3.txt` checksums and server architecture.
+3. Upload `ru.internal.mattermost.seen-1.1.3.tar.gz` through System Console plugin management as an update of the same plugin ID.
 4. Confirm the displayed version, enabled state and settings. Reload clients.
 5. Validate with at least two test users before enabling wider use. Test denied access, duplicate views, offline/reconnect, both themes and the layouts you use.
 

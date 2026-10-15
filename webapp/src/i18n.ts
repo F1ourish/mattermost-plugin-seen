@@ -1,5 +1,7 @@
 const en = {
   showAll: "Show all",
+  clientScope:
+    "Only views from Web/Desktop are counted. Mobile app views are not tracked due to Mattermost mobile architecture.",
   today: "Today",
   yesterday: "Yesterday",
   empty: "Not viewed yet",
@@ -21,6 +23,8 @@ const en = {
 };
 const ru: typeof en = {
   showAll: "Показать всех",
+  clientScope:
+    "Учитываются только просмотры в Web/Desktop. Просмотры из мобильных приложений не учитываются из-за ограничений архитектуры Mattermost.",
   today: "Сегодня",
   yesterday: "Вчера",
   empty: "Пока не просмотрено",

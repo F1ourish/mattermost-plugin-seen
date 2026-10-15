@@ -48,12 +48,15 @@ try {
 
  await button.click();await page.locator('dialog h4').filter({hasText:'Not viewed yet'}).waitFor();
  assert.equal(await page.locator('dialog button').count(),0);
+ assert.equal(await page.locator('dialog .mmseen-scope').innerText(),'Only views from Web/Desktop are counted. Mobile app views are not tracked due to Mattermost mobile architecture.');
+ assert.equal(await page.locator('dialog .mmseen-list .mmseen-scope').count(),0);
  await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});
  await page.waitForFunction(()=>document.querySelector('.mmseen-check')===document.activeElement);
  count=3;await page.evaluate(post=>window.ws({data:{post_ids:[post]}}),post);
  await page.getByRole('button',{name:'Viewed by 3',exact:true}).waitFor();assert.equal(await button.innerText(),'3');assert.equal(await button.locator('svg').count(),1);assert.equal(await button.locator('svg').getAttribute('aria-hidden'),'true');assert.equal(await button.locator('svg').evaluate(el=>getComputedStyle(el).width),'18px');
  await page.mouse.move(10,10);await button.hover();await page.getByText('Читатель 0',{exact:true}).waitFor();await page.getByText('Today, 11:24',{exact:true}).waitFor();
  assert.equal(await page.locator('.mmseen-row').count(),3);assert.equal(await page.getByRole('button',{name:/Previous|Next|^Close$/}).count(),0);
+ assert.equal(await page.locator('.mmseen-preview .mmseen-scope').isVisible(),true);
  assert.equal(await page.locator('.mmseen-row .mmseen-avatar, .mmseen-row img').first().evaluate(el=>getComputedStyle(el).width),'22px');
  count=4;await page.evaluate(post=>window.ws({data:{post_ids:[post]}}),post);
  await page.waitForFunction(()=>document.querySelectorAll('.mmseen-panel .mmseen-row').length===4);
@@ -97,11 +100,14 @@ try {
  await page.getByText('Читатель 69',{exact:true}).waitFor();assert.ok(offsets.includes(50));assert.ok(profileBatches.every(ids=>ids.length<=50));
  const times=await page.locator('dialog time').evaluateAll(nodes=>nodes.map(el=>Date.parse(el.dateTime)));assert.deepEqual(times,[...times].sort((a,b)=>a-b));
  const headingTop=await page.locator('dialog .mmseen-heading').evaluate(el=>el.getBoundingClientRect().top);
+ const scopeTop=await page.locator('dialog .mmseen-scope').evaluate(el=>el.getBoundingClientRect().top);
  await page.locator('dialog .mmseen-list').evaluate(el=>{el.scrollTop=500;});
  assert.equal(await page.locator('dialog .mmseen-heading').evaluate(el=>el.getBoundingClientRect().top),headingTop);
+ assert.equal(await page.locator('dialog .mmseen-scope').evaluate(el=>el.getBoundingClientRect().top),scopeTop);
  await page.screenshot({path:`${root}/docs/ui-1.1.0-full-dark.png`});
  await page.setViewportSize({width:360,height:500});
  assert.ok(await page.locator('dialog').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0 && r.right<=innerWidth && r.height<=innerHeight;}));
+ assert.equal(await page.locator('dialog .mmseen-scope').isVisible(),true);
  await page.setViewportSize({width:900,height:700});
  // Loaded rows, focus, scroll and cached profiles survive background refresh.
  const list=page.locator('dialog .mmseen-list');await list.focus();
@@ -117,6 +123,7 @@ try {
  assert.equal(await button.getAttribute('aria-controls'),await page.locator('dialog').getAttribute('id'));
  await page.mouse.click(5,5);await page.locator('dialog').waitFor({state:'detached'});
  fail=true;delay=250;await button.click();await page.getByRole('status').filter({hasText:'Loading viewers'}).waitFor();await page.getByRole('alert').waitFor();
+ assert.equal(await page.locator('dialog .mmseen-scope').isVisible(),true);
  fail=false;delay=0;await page.getByRole('button',{name:'Retry',exact:true}).click();await page.locator('dialog .mmseen-row').first().waitFor();
  await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});
  state='expired';count=0;await page.evaluate(post=>window.ws({data:{post_ids:[post]}}),post);
@@ -130,6 +137,7 @@ try {
  await page.evaluate(uid=>{window.state={...window.state,entities:{...window.state.entities,users:{...window.state.entities.users,profiles:{...window.state.entities.users.profiles,[uid]:{...window.state.entities.users.profiles[uid],locale:'ru'}}}}};window.subscribers.forEach(fn=>fn());},uid);
  await page.getByRole('button',{name:'Просмотрели: 3',exact:true}).waitFor();await button.click();
  await page.getByRole('dialog',{name:'Просмотрели',exact:true}).waitFor();await page.locator('dialog .mmseen-row').first().waitFor();
+ assert.equal(await page.locator('dialog .mmseen-scope').innerText(),'Учитываются только просмотры в Web/Desktop. Просмотры из мобильных приложений не учитываются из-за ограничений архитектуры Mattermost.');
  assert.match(await page.locator('dialog time').first().getAttribute('aria-label'),/Первая регистрация/);
  assert.equal(await page.locator('dialog time').first().innerText(), 'Сегодня, 11:24');
  await page.screenshot({path:`${root}/docs/ui-1.0.2-today.png`});

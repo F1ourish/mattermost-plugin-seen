@@ -23,3 +23,5 @@ Seen добавляет автору сообщения сведения о по
 [README проекта](../README.md), [Security policy](../SECURITY.md), [Contributing](../CONTRIBUTING.md), [Changelog](../CHANGELOG.md), [AI disclosure](../AI_DISCLOSURE.md).
 
 Документация не подтверждает выполнение действий на production. Адреса, владельцы репозитория и рабочие аккаунты намеренно не выдуманы.
+
+- [Релиз 1.1.3: пояснение о Web/Desktop](release-1.1.3.md).

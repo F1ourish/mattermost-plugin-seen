@@ -37,6 +37,7 @@ cp -R third-party "$stage/"
 cp webapp/dist/main.js "$stage/webapp/dist/"
 chmod 755 "$stage"/server/dist/plugin-*
 # Reproducible archive metadata and gzip header. Toolchain and locks are pinned.
-tar --sort=name --mtime='UTC 2026-10-12' --owner=0 --group=0 --numeric-owner -C "$staging_root" -cf - ru.internal.mattermost.seen | gzip -n > "$staging_root/bundle.tar.gz"
+# Match the metadata of the already prepared, owner-requested 1.1.3 archive.
+tar --sort=name --mtime='UTC 2026-10-11' --owner=0 --group=0 --numeric-owner -C "$staging_root" -cf - ru.internal.mattermost.seen | gzip -n > "$staging_root/bundle.tar.gz"
 mv "$staging_root/bundle.tar.gz" "dist/ru.internal.mattermost.seen-$version.tar.gz"
 sha256sum "dist/ru.internal.mattermost.seen-$version.tar.gz" > dist/SHA256SUMS

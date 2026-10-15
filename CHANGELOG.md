@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 - 2026-10-15
+
+- Add a persistent Web/Desktop-only scope note to the viewer preview and full list, including empty/loading/error states.
+- Explain the native mobile app limitation in the plugin manifest/settings and English/Russian README.
+- Preserve backend code, dependencies, receipt data, first timestamps and viewport collection behavior.
+
 ## [1.1.2] - 2026-10-12
 
 - Packaged the current Russian and English README, documentation links and release/operations guidance; README typography uses ordinary hyphens.
