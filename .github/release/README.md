@@ -23,3 +23,7 @@ On 2026-10-12 the owner requested the install archive in public Releases. `publi
 Package validation is pinned to the unchanged 1.1.2 server hashes and the new scope-note-only web bundle. The existing 1.1.2 helpers remain unchanged. On 2026-10-15 the owner explicitly requested publication of the prepared 1.1.3 release to this repository.
 
 The workflow now invokes `publish_1_1_3.py` only after all build/security/browser/package checks pass on main. This separate, version-specific helper additionally pins the complete installer SHA256 (`54b2ad23691a107fabcf6c7fdbd53f545d82d0a6efc2067a3da1bd81437669ba`), verifies the same-run artifact and exact-commit report, creates the source ZIP and checksums, verifies stored draft bytes, publishes a public pre-release and checks anonymous downloads of all four files. The installer metadata matches the already prepared archive. Live/HA acceptance remains NOT RUN; this release does not change the current stable release designation. Existing assets/releases are never replaced. This authorization does not extend to future versions or mobile functionality.
+
+## 1.1.4 inline-placement candidate
+
+Package validation now targets candidate 1.1.4, retains the unchanged server binary hashes and pins the web bundle containing the edit-placement fix. The workflow can produce the `seen-candidate` artifact after all checks pass. Publication helpers remain version-pinned to 1.1.2/1.1.3 and return without publishing 1.1.4; this candidate does not authorize a release or asset replacement.

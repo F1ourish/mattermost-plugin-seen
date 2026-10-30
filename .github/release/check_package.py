@@ -1,4 +1,4 @@
-"""Validate the 1.1.3 install archive before handing it to the release job."""
+"""Validate the 1.1.4 candidate archive; this does not authorize publication."""
 
 import hashlib
 import json
@@ -10,14 +10,14 @@ import tarfile
 from urllib.parse import unquote, urlsplit
 
 
-VERSION = '1.1.3'
+VERSION = '1.1.4'
 PLUGIN_ID = 'ru.internal.mattermost.seen'
 # Backend hashes verified against 1.1.2 (unchanged since 1.1.1).
-# Web bundle hash is pinned to the scope-note-only 1.1.3 build.
+# Web bundle hash is pinned to the inline-placement fix for 1.1.4.
 RUNTIME_SHA256 = {
     'server/dist/plugin-linux-amd64': 'cb077f1badb8b35d3b1e36707236e0f4eb14a53b9dd0f5c6b66d8665a7418d1d',
     'server/dist/plugin-linux-arm64': 'a9a4c6d00843b1b86310d0974fdc01076a199f35d46454dd8b21c5a3707a786d',
-    'webapp/dist/main.js': 'ee2c174b19acf1a3c3d10fd5d1b42f4799934a68969fb91cb44e6566ad2e0afe',
+    'webapp/dist/main.js': '567fa7e7f10e2fb1d52f424008b5f3e8cc99c75078544cb1a8e749cb4e199ea7',
 }
 
 
@@ -77,7 +77,7 @@ def validate_package(path):
         for relative, expected in RUNTIME_SHA256.items():
             actual = hashlib.sha256(read(relative)).hexdigest()
             if actual != expected:
-                raise RuntimeError('Runtime differs from pinned 1.1.3 package: ' + relative)
+                raise RuntimeError('Runtime differs from pinned 1.1.4 package: ' + relative)
             actual_runtime[relative] = actual
             if relative.startswith('server/') and regular[PLUGIN_ID + '/' + relative].mode & 0o777 != 0o755:
                 raise RuntimeError('Plugin binary must have executable mode 0755.')
@@ -108,7 +108,7 @@ def validate_package(path):
         'archive': path.name,
         'archive_sha256': digest(path),
         'backend_identical_to': '1.1.2',
-        'frontend_change_scope': 'Web/Desktop client coverage note only',
+        'frontend_change_scope': 'Restore trailing inline receipt placement after message edits',
         'runtime_files_sha256': actual_runtime,
         'relative_links_checked': link_count,
         'documents_and_licenses_checked': len(expected_files),

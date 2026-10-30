@@ -38,8 +38,9 @@ export function mountInline(
         ? last
         : null;
     const inline = Boolean(target);
-    if (target && container.parentElement !== target)
-      target.appendChild(container);
+    // React can keep the paragraph while replacing its own children around
+    // our portal. Restore the trailing position even when the parent is unchanged.
+    if (target && target.lastChild !== container) target.appendChild(container);
     if (!target && container.parentElement !== anchor)
       anchor.appendChild(container);
     anchor.classList.toggle("mmseen-anchor-inline", inline);
