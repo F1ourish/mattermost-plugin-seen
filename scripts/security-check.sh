@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-export GOTOOLCHAIN=go1.26.9
+export GOTOOLCHAIN=go1.26.10
 version=$(node scripts/check-version.mjs)
 archive="dist/ru.internal.mattermost.seen-$version.tar.gz"
 if [[ ! -f "$archive" ]]; then

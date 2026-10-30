@@ -2,10 +2,10 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 version=$(node scripts/check-version.mjs)
-# GNU tar, Go 1.26.9, Node 24.19.0, npm lockfile.
+# GNU tar, Go 1.26.10, Node 24.19.0, npm lockfile.
 # Pin the release compiler so an older installed toolchain cannot reintroduce
 # fixed standard-library vulnerabilities.
-export GOTOOLCHAIN=go1.26.9
+export GOTOOLCHAIN=go1.26.10
 npm --prefix webapp ci --ignore-scripts
 npm --prefix webapp run format:check
 npm --prefix webapp run lint

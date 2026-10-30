@@ -26,4 +26,4 @@ The workflow now invokes `publish_1_1_3.py` only after all build/security/browse
 
 ## 1.1.4 inline-placement candidate
 
-Package validation now targets candidate 1.1.4, retains the unchanged server binary hashes and pins the web bundle containing the edit-placement fix. The workflow can produce the `seen-candidate` artifact after all checks pass. Publication helpers remain version-pinned to 1.1.2/1.1.3 and return without publishing 1.1.4; this candidate does not authorize a release or asset replacement.
+Package validation now targets candidate 1.1.4 and pins the web bundle containing the edit-placement fix. After the initial CI security findings, Go is pinned to 1.26.10 and x/net to 0.62.0. Both server binaries are rebuilt and receive new pinned hashes; source equivalence does not imply binary equivalence with earlier releases. The workflow can produce the `seen-candidate` artifact after all checks pass. Publication helpers remain version-pinned to 1.1.2/1.1.3 and return without publishing 1.1.4; this candidate does not authorize a release or asset replacement.

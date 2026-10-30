@@ -12,11 +12,11 @@ from urllib.parse import unquote, urlsplit
 
 VERSION = '1.1.4'
 PLUGIN_ID = 'ru.internal.mattermost.seen'
-# Backend hashes verified against 1.1.2 (unchanged since 1.1.1).
+# Backend hashes pin the Go 1.26.10/x/net 0.62.0 rebuild for 1.1.4.
 # Web bundle hash is pinned to the inline-placement fix for 1.1.4.
 RUNTIME_SHA256 = {
-    'server/dist/plugin-linux-amd64': 'cb077f1badb8b35d3b1e36707236e0f4eb14a53b9dd0f5c6b66d8665a7418d1d',
-    'server/dist/plugin-linux-arm64': 'a9a4c6d00843b1b86310d0974fdc01076a199f35d46454dd8b21c5a3707a786d',
+    'server/dist/plugin-linux-amd64': 'f4d2b2383f6f35609a53f44f7f233e1bb0457fa0537e418a8dd7f69d83d2ed2e',
+    'server/dist/plugin-linux-arm64': '7c89082cc600701d552736f111b9ff53efaea081e15ef3a4ea97c9cba3b16dbe',
     'webapp/dist/main.js': '567fa7e7f10e2fb1d52f424008b5f3e8cc99c75078544cb1a8e749cb4e199ea7',
 }
 
@@ -107,7 +107,9 @@ def validate_package(path):
         'workflow_run_id': os.environ.get('GITHUB_RUN_ID', ''),
         'archive': path.name,
         'archive_sha256': digest(path),
-        'backend_identical_to': '1.1.2',
+        'backend_source_unchanged_from': '1.1.3',
+        'backend_change_scope': 'Rebuilt with Go 1.26.10 and patched Go modules',
+        'go_toolchain': 'go1.26.10',
         'frontend_change_scope': 'Restore trailing inline receipt placement after message edits',
         'runtime_files_sha256': actual_runtime,
         'relative_links_checked': link_count,

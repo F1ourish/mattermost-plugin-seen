@@ -1,10 +1,10 @@
 # Подготовка GitHub и выпуск
 
-Обновлено 12.10.2026. Текущий кандидат 1.1.2. Репозиторий `F1ourish/mattermost-plugin-seen` публичный. CI готовит неопубликованный draft pre-release exact успешного commit; deployment не выполняется. Прежний draft 1.1.1 на `82bdcdc952767cdb017ab55720a123b8e96f7cd6` и его assets сохраняются. Текущие настройки и ограничения перечислены в [проверке репозитория](repository-review-2026-10-12.md).
+Обновлено 30.10.2026. Текущий кандидат 1.1.4. Репозиторий `F1ourish/mattermost-plugin-seen` публичный. CI создаёт `seen-candidate` для exact успешного commit; deployment не выполняется. Publication helpers закреплены за 1.1.2/1.1.3 и не публикуют 1.1.4. Прежние releases и assets сохраняются. Исторические настройки и ограничения перечислены в [проверке репозитория](repository-review-2026-10-12.md); актуальный статус кандидата - в [release readiness](release-readiness.md).
 
 ## Два разных решения
 
-Исходники можно опубликовать как проект с экспериментальным статусом после проверки прав и приватности. Стабильный релиз для production требует дополнительно live security/functional acceptance и подтверждённых ограничений поддержки. Пакет 1.1.2 сохраняет исправления dependency findings из security patch 1.1.1; это не закрывает deployment-specific gates.
+Исходники можно опубликовать как проект с экспериментальным статусом после проверки прав и приватности. Стабильный релиз для production требует дополнительно live security/functional acceptance и подтверждённых ограничений поддержки. Кандидат 1.1.4 обновляет Go/x/net для findings от 30.10.2026; это не закрывает deployment-specific gates.
 
 ## Перед public visibility
 
@@ -18,9 +18,9 @@
 ## Релиз
 
 1. Подготовить кандидат из reviewed source snapshot/commit. Не заменять прежние assets; любое изменение вложенной документации также меняет checksum.
-2. Запустить `make dist`, затем `make security-check` и browser smoke на чистом checkout. Сохранить commit SHA, если он существует, toolchain versions, logs, dependency results и SHA256. Build/CI используют Go 1.26.9 и govulncheck 1.9.0; security gate проверяет оба упакованных Linux binaries, исходники, module integrity и npm audit.
+2. Запустить `make dist`, затем `make security-check` и browser smoke на чистом checkout. Сохранить commit SHA, если он существует, toolchain versions, logs, dependency results и SHA256. Build/CI используют Go 1.26.10 и govulncheck 1.9.0; security gate проверяет оба упакованных Linux binaries, исходники, module integrity и npm audit.
 3. Проверить manifest ID/version, обе архитектуры, compiler/build info, актуальные README/SECURITY/CHANGELOG/AI disclosure, docs links и LICENSE/NOTICE/third-party. В 1.1.2 build включает актуальные русский/английский README и весь набор docs; прежний пункт о неполной упаковке 1.0.3 сохранён только в историческом отчёте. Отдельно проверить executable bits source ZIP и отсутствие screenshots/internal evidence/cache/node_modules.
-4. Выполнить `python3 .github/release/check_package.py`; для 1.1.2 все три runtime hashes должны совпадать с проверенным 1.1.1. CI передаёт tar SHA256 из read-only build job в release job; helper повторно проверяет artifact из того же run. Приложить `release-validation-1.1.2.json`, source ZIP из exact commit и `SHA256SUMS-1.1.2-github.txt`. На exact binary выполнить live gate, записать результаты. Для unresolved HA явно не заявлять HA поддержку. Подготовить release notes с installation, upgrade/rollback и known limitations.
+4. Выполнить `python3 .github/release/check_package.py`; все три runtime hashes должны совпадать с закреплёнными для 1.1.4 после обновления compiler/dependencies и frontend. Приложить `release-validation-1.1.4.json` с exact commit/run и checksum. На exact binary выполнить live gate, записать результаты. Для unresolved HA явно не заявлять HA поддержку. Подготовить release notes с installation, upgrade/rollback и known limitations. Публикация этой версии требует отдельного решения и version-specific helper; прежние helpers не адаптировать обходом их guard.
 5. Выбрать версию по изменению: patch - совместимые исправления; minor - новые совместимые возможности; major - несовместимые изменения API/данных/конфигурации с migration plan. Ощущение «готовности» не требует нового major. Plugin ID сохранить.
 6. После закрытия gates поставить tag на проверенный commit и приложить tar.gz, checksum, source snapshot/ссылку на commit, release notes и обезличенные результаты. При незакрытой stable-приёмке отметить GitHub release как pre-release и ограничения явно.
 7. Не пересобирать и не перезаписывать существующий asset под тем же именем с другой суммой. Для изменений выдавать новый patch; документацию версионировать отдельно.
@@ -43,4 +43,4 @@ gitleaks git . --redact --log-opts="--all"
 
 Module-only GO-2026-5932 не подавлять глобальной allowlist: OpenPGP не входит в compiled dependency list. Сопоставлять source scan, binary symbols и результаты конкретного package checksum; после новых зависимостей переснять оценку. Binaries без symbol table могут давать консервативные module fallback findings, поэтому 1.1.1 сохраняет symbols для анализа.
 
-Исходники опубликованы; draft не опубликован как GitHub release и deployment не выполнен. Assets кандидата остаются привязаны к проверенному commit. Последующие изменения документации в main не перезаписывают их; для нового install-пакета назначить следующий patch и новые суммы.
+Исходники опубликованы; кандидат 1.1.4 не опубликован как GitHub release и deployment не выполнен. Артефакт кандидата остаётся привязан к проверенному commit. Последующие изменения документации в main не перезаписывают существующие release assets; для нового опубликованного install-пакета назначить следующий patch и новые суммы.

@@ -14,7 +14,7 @@ If private reporting is unavailable, request a private reporting channel without
 
 ## Supported scope
 
-Version 1.1.2 retains the runtime and dependency fixes of 1.1.1. The 1.1.1 security patch updated the release compiler to Go 1.26.9 and golang.org/x/net to 0.60.0, addressing the fixable dependency advisories identified in the 2026-10-10 review. Earlier packages built with Go 1.26.7/x/net 0.58.0 should be replaced with a validated fixed package. Historical code and documentation reviews do not claim live gateway or HA acceptance. See [release readiness](docs/release-readiness.md) and [security patch notes](docs/release-1.1.1.md). A long-term support policy and patch response timeline have not been established. Review status is not a guarantee that all vulnerabilities have been found.
+Candidate 1.1.4 updates the pinned release compiler to Go 1.26.10 for GO-2026-6809 and golang.org/x/net to 0.62.0 for GO-2026-6866/GO-2026-6860, identified by CI on 2026-10-30. The npm lockfile also updates the transitive lint dependency Zod to 4.6.7 for GHSA-mrhx-c7xc-m3w5; this development dependency is not shipped in the web bundle. Versions 1.1.1-1.1.3 were built with Go 1.26.9/x/net 0.60.0 and retain those newly reported Go findings. Candidate publication and acceptance status are recorded in [release readiness](docs/release-readiness.md) and [1.1.4 notes](docs/release-1.1.4.md); use the exact successful CI run for current scan results. Historical code and documentation reviews do not claim live gateway or HA acceptance. A long-term support policy and patch response timeline have not been established. Review status is not a guarantee that all vulnerabilities have been found.
 
 Security-relevant behavior includes:
 

@@ -270,7 +270,7 @@
   },
   {
     "module": "golang.org/x/crypto",
-    "version": "v0.57.0",
+    "version": "v0.58.0",
     "notices": [
       "third-party/golang.org_x_crypto/LICENSE"
     ]
@@ -284,21 +284,21 @@
   },
   {
     "module": "golang.org/x/net",
-    "version": "v0.60.0",
+    "version": "v0.62.0",
     "notices": [
       "third-party/golang.org_x_net/LICENSE"
     ]
   },
   {
     "module": "golang.org/x/sys",
-    "version": "v0.48.0",
+    "version": "v0.49.0",
     "notices": [
       "third-party/golang.org_x_sys/LICENSE"
     ]
   },
   {
     "module": "golang.org/x/text",
-    "version": "v0.42.0",
+    "version": "v0.43.0",
     "notices": [
       "third-party/golang.org_x_text/LICENSE"
     ]

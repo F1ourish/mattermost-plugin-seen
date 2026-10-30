@@ -15,7 +15,7 @@ Plugin ID: `ru.internal.mattermost.seen`. Идентификатор сохра�
 
 ## Статус и совместимость
 
-Кандидат **1.1.4** исправляет перемещение галочек в начало сообщения после редактирования, в том числе при добавлении описания перед двумя ссылками. Индикатор возвращается в конец даже при сохранении того же абзаца React. Backend, зависимости, формат receipts и viewport-правила сохраняются. Сохранены сноска Web/Desktop, security fixes и preview до пяти пользователей с отдельным полным списком.
+Кандидат **1.1.4** исправляет перемещение галочек в начало сообщения после редактирования, в том числе при добавлении описания перед двумя ссылками. Индикатор возвращается в конец даже при сохранении того же абзаца React. Также обновлены compiler до Go 1.26.10 и golang.org/x/net до 0.62.0 для исправления advisories, найденных CI 30.10.2026. Исходники backend, формат receipts и viewport-правила сохраняются. Сохранены сноска Web/Desktop и preview до пяти пользователей с отдельным полным списком.
 
 CI собирает и проверяет exact commit через build, browser, security и package checks. Кандидат 1.1.4 до отдельной публикации доступен только в артефакте успешного CI. Существующие helpers закреплены за предыдущими версиями и не публикуют 1.1.4. Опубликованные пакеты доступны в [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases).
 
@@ -64,7 +64,7 @@ sha256sum -c dist/SHA256SUMS
 
 Ожидается `OK` для install-архива и exit 0. Сверить commit/run в `release-validation-1.1.4.json` с выбранным CI; наличие артефакта не заменяет приёмку на живом Mattermost.
 
-Миграция системной DB schema не требуется. Существующие отметки читаются в прежнем формате; tombstone добавляет optional marker в Plugin KV. При security rollback отключить Seen до появления совместимого fixed package. Возврат к 1.1.0 возвращает dependency advisories; KV не удаляется как штатный шаг rollback. Подробнее: [эксплуатационный ранбук](docs/operations.md).
+Миграция системной DB schema не требуется. Существующие отметки читаются в прежнем формате; tombstone добавляет optional marker в Plugin KV. При security rollback отключить Seen до появления совместимого fixed package. Возврат к 1.1.3 возвращает исправленные в 1.1.4 Go/x/net advisories; KV не удаляется как штатный шаг rollback. Подробнее: [эксплуатационный ранбук](docs/operations.md).
 
 ## Настройки в System Console
 
@@ -93,7 +93,7 @@ Identity берётся из Mattermost gateway. Плагин не предна�
 
 ## Сборка и проверки
 
-Требуются Linux, Go 1.26.9, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make и C compiler для race tests. Версии Go/npm dependencies закреплены. Build script использует `GOTOOLCHAIN=go1.26.9`; для offline сборки заранее подготовить compiler и проверенный dependency cache.
+Требуются Linux, Go 1.26.10, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make и C compiler для race tests. Версии Go/npm dependencies закреплены. Build script использует `GOTOOLCHAIN=go1.26.10`; для offline сборки заранее подготовить compiler и проверенный dependency cache.
 
 В корне исходников:
 

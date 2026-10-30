@@ -15,7 +15,7 @@ Plugin ID: `ru.internal.mattermost.seen`. The ID is retained for installation an
 
 ## Release status
 
-Candidate 1.1.4 fixes the viewing indicator moving before the message text after an edit, including adding a description before two links. The indicator returns to the end even when React preserves its paragraph. Backend code, dependencies, receipt storage and viewport rules are unchanged. The Web/Desktop scope note, security fixes and five-viewer preview/full-list dialog are retained. Live Mattermost and HA acceptance remain pending.
+Candidate 1.1.4 fixes the viewing indicator moving before the message text after an edit, including adding a description before two links. The indicator returns to the end even when React preserves its paragraph. It also updates the release compiler to Go 1.26.10 and golang.org/x/net to 0.62.0 for the advisories found by CI on 2026-10-30. Backend source, receipt storage and viewport rules are unchanged. The Web/Desktop scope note and five-viewer preview/full-list dialog are retained. Live Mattermost and HA acceptance remain pending.
 
 CI builds and validates the exact commit with build, browser, security and package checks. Candidate 1.1.4 is available only from a successful CI artifact until separately published. The existing publication helpers are restricted to earlier versions and do not publish 1.1.4. See [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) for published packages.
 
@@ -83,7 +83,7 @@ No system database migration is required. Existing receipt documents remain read
 
 ## Build and checks
 
-Build prerequisites: Linux, Go 1.26.9, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make and a C compiler for race tests. Go and npm dependencies are pinned. The release script pins GOTOOLCHAIN=go1.26.9; an offline environment needs that compiler and the dependency cache prepared in advance.
+Build prerequisites: Linux, Go 1.26.10, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make and a C compiler for race tests. Go and npm dependencies are pinned. The release script pins GOTOOLCHAIN=go1.26.10; an offline environment needs that compiler and the dependency cache prepared in advance.
 
 ```sh
 make dist
