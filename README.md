@@ -15,15 +15,15 @@ Plugin ID: `ru.internal.mattermost.seen`. The ID is retained for installation an
 
 ## Release status
 
-Version 1.1.3 adds a Web/Desktop-only scope note in both viewer panels and clarifies the plugin description and documentation. Backend code, dependencies, receipt storage and viewport rules are unchanged. It retains the security fixes and five-viewer preview/full-list dialog from earlier versions. This package is a release candidate for test-environment acceptance; stable production approval still requires live Mattermost gateway and functional checks. Two-node validation is additionally required before claiming HA support. Do not interpret the version number as a security certification or an HA guarantee.
+Candidate 1.1.4 fixes the viewing indicator moving before the message text after an edit, including adding a description before two links. The indicator returns to the end even when React preserves its paragraph. It also updates the release compiler to Go 1.26.10 and golang.org/x/net to 0.62.0 for the advisories found by CI on 2026-10-30. Backend source, receipt storage and viewport rules are unchanged. The Web/Desktop scope note and five-viewer preview/full-list dialog are retained. Live Mattermost and HA acceptance remain pending.
 
-CI builds and validates the exact commit with build, browser, security and package checks. Existing release assets are preserved; changed packages use a new version. The release-preparation helpers for 1.1.2 remain version-pinned and do not publish 1.1.3 automatically. See [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) for published packages and the [repository review](docs/repository-review-2026-10-12.md) for historical settings.
+CI builds and validates the exact commit with build, browser, security and package checks. Candidate 1.1.4 is available only from a successful CI artifact until separately published. The existing publication helpers are restricted to earlier versions and do not publish 1.1.4. See [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases) for published packages.
 
 Target server: Mattermost 11.10.x; manifest minimum: 11.10.0. Server executables are supplied for Linux amd64 and arm64. Other server versions require validation. Mobile receipt collection and Connected Workspaces receipt synchronization are not supported.
 
 ## Project documentation
 
-See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.3 release notes](docs/release-1.1.3.md) for this package and installation checks, [1.1.1 release notes](docs/release-1.1.1.md) for the security update, and [1.1.0 release notes](docs/release-1.1.0.md) for the existing UI. The [2026-10-01 review](docs/release-readiness-1.0.3.md) remains a historical baseline; its scans are not the current dependency status.
+See [documentation index](docs/README.md), [release readiness](docs/release-readiness.md), [operations](docs/operations.md), [API](docs/api.md), and [contributing](CONTRIBUTING.md). See [1.1.4 candidate notes](docs/release-1.1.4.md) for this fix and installation checks, [1.1.3 release notes](docs/release-1.1.3.md) for client coverage, and [1.1.1 release notes](docs/release-1.1.1.md) for the security update.
 
 ## Features
 
@@ -74,8 +74,8 @@ Message deletion replaces the receipt document with a durable tombstone containi
 ## Installation and upgrade
 
 1. Back up the previous plugin package and settings; follow your deployment's data backup policy.
-2. Verify the supplied `SHA256SUMS-1.1.3.txt` checksums and server architecture.
-3. Upload `ru.internal.mattermost.seen-1.1.3.tar.gz` through System Console plugin management as an update of the same plugin ID.
+2. Download the candidate from a successful CI run, verify its installer checksum and server architecture using the [1.1.4 notes](docs/release-1.1.4.md).
+3. Upload `ru.internal.mattermost.seen-1.1.4.tar.gz` through System Console plugin management as an update of the same plugin ID.
 4. Confirm the displayed version, enabled state and settings. Reload clients.
 5. Validate with at least two test users before enabling wider use. Test denied access, duplicate views, offline/reconnect, both themes and the layouts you use.
 
@@ -83,7 +83,7 @@ No system database migration is required. Existing receipt documents remain read
 
 ## Build and checks
 
-Build prerequisites: Linux, Go 1.26.9, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make and a C compiler for race tests. Go and npm dependencies are pinned. The release script pins GOTOOLCHAIN=go1.26.9; an offline environment needs that compiler and the dependency cache prepared in advance.
+Build prerequisites: Linux, Go 1.26.10, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make and a C compiler for race tests. Go and npm dependencies are pinned. The release script pins GOTOOLCHAIN=go1.26.10; an offline environment needs that compiler and the dependency cache prepared in advance.
 
 ```sh
 make dist

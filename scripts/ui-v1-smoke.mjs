@@ -36,7 +36,7 @@ try {
   window.subscribers=new Set();window.components={};window.registerPlugin=(_id,p)=>{window.plugin=p;p.initialize({registerPostMessageAttachmentComponent:c=>window.components.attachment=c,registerRootComponent:c=>window.components.root=c,registerPostDropdownMenuAction:(_name,fn)=>window.openList=fn,registerWebSocketEventHandler:(_event,fn)=>window.ws=fn,registerReconnectHandler:()=>{}},{getState:()=>window.state,subscribe:fn=>{window.subscribers.add(fn);return()=>window.subscribers.delete(fn);}});};
  },{post,uid,channel});
  await page.addScriptTag({path:`${root}/webapp/dist/main.js`});
- await page.evaluate(post=>{const h=React.createElement;ReactDOM.render(h(React.Fragment,null,h(window.components.root),h('div',{style:{position:'absolute',bottom:20,left:580,width:300}},h('div',{id:'postMessageText_'+post,className:'post-message__text'},h('p',null,'Сообщение')),h(window.components.attachment,{postId:post}))),document.getElementById('app'));},post);
+ await page.evaluate(post=>{const h=React.createElement;window.renderMessage=(parts=['Сообщение'])=>ReactDOM.render(h(React.Fragment,null,h(window.components.root),h('div',{style:{position:'absolute',bottom:20,left:580,width:300}},h('div',{id:'postMessageText_'+post,className:'post-message__text'},h('p',null,...parts)),h(window.components.attachment,{postId:post}))),document.getElementById('app'));window.renderMessage();},post);
  const button=page.locator('.mmseen-check');await page.getByRole('button',{name:'Not viewed yet',exact:true}).waitFor();
  assert.equal(await button.getAttribute('title'),'Not viewed yet');assert.equal(await button.locator('svg').count(),1);assert.ok((await button.getAttribute('class')).includes('mmseen-check-unread'));
  // R1: missing authorization removes the indicator, then reconnect alone recovers it.
@@ -149,6 +149,24 @@ try {
  await page.getByRole('alert').waitFor();assert.equal(await page.locator('dialog .mmseen-row').count(),0);
  fail=false;await page.getByRole('button',{name:'Повторить',exact:true}).click();await page.locator('dialog .mmseen-row').first().waitFor();
  await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});
+ // React keeps the paragraph but replaces its own children when a description
+ // is prepended to two links. The portal must remain after the host's content.
+ for (const hardBreak of [false,true]) {
+  await page.evaluate(hardBreak=>{const h=React.createElement;const link=(key,url)=>h('a',{key,href:url},url);window.renderMessage([link(0,'https://example.com/one'),hardBreak?h('br',{key:1}):'\n',link(2,'https://example.com/two')]);},hardBreak);
+  await page.waitForFunction(()=>{const inline=document.querySelector('.mmseen-inline');return inline?.parentElement?.tagName==='P' && inline===inline.parentElement.lastChild;});
+  await page.evaluate(()=>{window.editParagraph=document.querySelector('.post-message__text p');window.editReceipt=document.querySelector('.mmseen-check');});
+  for (const description of ['Описание перед ссылками','Повторно изменённое описание']) {
+   await page.evaluate(({hardBreak,description})=>{const h=React.createElement;const link=(key,url)=>h('a',{key,href:url},url);const edited=h('small',{key:'edited'},' Отредактировано');window.renderMessage(hardBreak?[description,h('br',{key:1}),link(2,'https://example.com/one'),h('br',{key:3}),link(4,'https://example.com/two'),edited]:[description+'\n',link(1,'https://example.com/one'),'\n',link(3,'https://example.com/two'),edited]);},{hardBreak,description});
+   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(resolve)));
+   assert.deepEqual(await page.evaluate(()=>{const p=document.querySelector('.post-message__text p');const inline=p.querySelector('.mmseen-inline');return {sameParagraph:p===window.editParagraph,sameReceipt:inline?.querySelector('.mmseen-check')===window.editReceipt,trailing:inline===p.lastChild,links:Array.from(p.querySelectorAll('a'),a=>a.getAttribute('href'))};}),{sameParagraph:true,sameReceipt:true,trailing:true,links:['https://example.com/one','https://example.com/two']});
+   assert.match(await page.locator('.post-message__text p').innerText(),new RegExp(description));
+   assert.equal(await button.count(),1);
+  }
+ }
+ // Complex final blocks retain the official attachment fallback.
+ await page.evaluate(()=>document.querySelector('.post-message__text').innerHTML='<pre><code>code block</code></pre>');
+ await page.waitForFunction(()=>document.querySelector('.mmseen-anchor > .mmseen-inline .mmseen-check'));
+ assert.equal(await page.locator('.mmseen-anchor-inline').count(),0);
  // Inline reattachment after Markdown is replaced.
  await page.evaluate(()=>document.querySelector('.post-message__text').innerHTML='<p>Изменённое сообщение</p>');
  await page.waitForFunction(()=>document.querySelector('.post-message__text p .mmseen-check'));
@@ -157,5 +175,5 @@ try {
  assert.equal(await button.innerText(),'');assert.equal(await button.locator('svg').count(),1);
  await page.evaluate(()=>{ReactDOM.unmountComponentAtNode(document.getElementById('app'));window.plugin.uninitialize();});
  assert.equal(await page.locator('.mmseen-inline').count(),0);assert.deepEqual(errors,[]);
- console.log(JSON.stringify({result:'PASS',scope:'R1 reconnect recovery, refresh scroll/focus/profile cache, aria-controls/expanded, ru/en locale and denied clear, live viewer refresh and expired state, empty tooltip/dialog, inline group count, names and first-view time, 3 viewers complete, 70 viewers scroll/auto-load, profile batches, sorting, loading/error/retry, dark/light, keyboard/ESC/focus return/outside click, edit/DM/cleanup',offsets}));
+ console.log(JSON.stringify({result:'PASS',scope:'R1 reconnect recovery, refresh scroll/focus/profile cache, aria-controls/expanded, ru/en locale and denied clear, live viewer refresh and expired state, empty tooltip/dialog, inline group count, names and first-view time, 3 viewers complete, 70 viewers scroll/auto-load, profile batches, sorting, loading/error/retry, dark/light, keyboard/ESC/focus return/outside click, soft/hard-break links with prepended description and repeated edits, same paragraph/receipt, complex-block fallback, edit/DM/cleanup',offsets}));
 } finally {await browser.close();server.close();}

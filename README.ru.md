@@ -15,9 +15,9 @@ Plugin ID: `ru.internal.mattermost.seen`. Идентификатор сохра�
 
 ## Статус и совместимость
 
-Версия **1.1.3** добавляет пояснение о поддержке Web/Desktop в preview и полном списке просмотров, описании плагина и документации. Backend, зависимости, формат receipts и viewport-правила сохраняются; изменён только поясняющий текст интерфейса. Сохранены security fixes и preview до пяти пользователей с отдельным полным списком.
+Кандидат **1.1.4** исправляет перемещение галочек в начало сообщения после редактирования, в том числе при добавлении описания перед двумя ссылками. Индикатор возвращается в конец даже при сохранении того же абзаца React. Также обновлены compiler до Go 1.26.10 и golang.org/x/net до 0.62.0 для исправления advisories, найденных CI 30.10.2026. Исходники backend, формат receipts и viewport-правила сохраняются. Сохранены сноска Web/Desktop и preview до пяти пользователей с отдельным полным списком.
 
-CI собирает и проверяет exact commit через build, browser, security и package checks. Существующие assets сохраняются; изменённый пакет получает новую версию. Старые helpers подготовки/публикации закреплены за 1.1.2 и не публикуют 1.1.3 автоматически. Опубликованные пакеты доступны в [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases). См. [историческую проверку оформления репозитория](docs/repository-review-2026-10-12.md).
+CI собирает и проверяет exact commit через build, browser, security и package checks. Кандидат 1.1.4 до отдельной публикации доступен только в артефакте успешного CI. Существующие helpers закреплены за предыдущими версиями и не публикуют 1.1.4. Опубликованные пакеты доступны в [Releases](https://github.com/F1ourish/mattermost-plugin-seen/releases).
 
 Кандидат предназначен для приёмки на тестовом контуре. Проверки реального Mattermost gateway, прав доступа, CSRF и функциональной приёмки требуются перед рекомендацией production. Поддержка HA должна быть подтверждена отдельным app1/app2, failover и нагрузочным прогоном. Номер версии не является сертификатом безопасности.
 
@@ -50,21 +50,21 @@ CI собирает и проверяет exact commit через build, browser
 
 Выполнять на выбранном тестовом контуре. До изменения записать текущую версию и настройки, проверить штатные login/messages и актуальность backup, сохранить предыдущий пакет для диагностики. На время отключения Seen отсутствуют его индикаторы и сбор новых отметок.
 
-1. Скачать `ru.internal.mattermost.seen-1.1.3.tar.gz` и проверить SHA256. Source ZIP не является установочным пакетом.
+1. Скачать `ru.internal.mattermost.seen-1.1.4.tar.gz` из успешного CI и проверить SHA256 по [инструкции кандидата](docs/release-1.1.4.md). Source ZIP не является установочным пакетом.
 2. Отключить Seen через System Console. При нескольких app-нодах согласовать обновление всех нод; не смешивать writers 1.0.0 с версиями, поддерживающими tombstones.
-3. Загрузить tar.gz через управление плагинами как обновление существующего ID. Проверить версию 1.1.3 и результат upload/activation; при неясном результате сверить список плагинов и логи по времени операции.
+3. Загрузить tar.gz через управление плагинами как обновление существующего ID. Проверить версию 1.1.4 и результат upload/activation; при неясном результате сверить список плагинов и логи по времени операции.
 4. Проверить сохранение RetentionDays/EnablePublic, включить плагин, перезагрузить Web/Desktop clients и подтвердить одинаковую версию на app-нодах.
 5. Проверить поведение минимум с двумя тестовыми пользователями: отказ доступа, повтор, reconnect, обе темы и используемые layouts. Для полной матрицы T01-T35 использовать [инструкцию тестирования](docs/testing.md).
 
-Для комплекта 1.1.3 используется `SHA256SUMS-1.1.3.txt`. При обоих скачанных assets рядом с файлом сумм на Linux:
+В артефакте CI файл `SHA256SUMS` содержит путь `dist/ru.internal.mattermost.seen-1.1.4.tar.gz`. Разместить содержимое артефакта в каталоге `dist` и из его родительского каталога выполнить:
 
 ```sh
-sha256sum -c SHA256SUMS-1.1.3.txt
+sha256sum -c dist/SHA256SUMS
 ```
 
-Ожидается `OK` для install-архива, source ZIP и `release-validation-1.1.3.json`, exit 0. Если скачан только tar.gz, сверить именно его сумму со строкой checksum file; общий check иначе сообщит о недостающих assets.
+Ожидается `OK` для install-архива и exit 0. Сверить commit/run в `release-validation-1.1.4.json` с выбранным CI; наличие артефакта не заменяет приёмку на живом Mattermost.
 
-Миграция системной DB schema не требуется. Существующие отметки читаются в прежнем формате; tombstone добавляет optional marker в Plugin KV. При security rollback отключить Seen до появления совместимого fixed package. Возврат к 1.1.0 возвращает dependency advisories; KV не удаляется как штатный шаг rollback. Подробнее: [эксплуатационный ранбук](docs/operations.md).
+Миграция системной DB schema не требуется. Существующие отметки читаются в прежнем формате; tombstone добавляет optional marker в Plugin KV. При security rollback отключить Seen до появления совместимого fixed package. Возврат к 1.1.3 возвращает исправленные в 1.1.4 Go/x/net advisories; KV не удаляется как штатный шаг rollback. Подробнее: [эксплуатационный ранбук](docs/operations.md).
 
 ## Настройки в System Console
 
@@ -93,7 +93,7 @@ Identity берётся из Mattermost gateway. Плагин не предна�
 
 ## Сборка и проверки
 
-Требуются Linux, Go 1.26.9, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make и C compiler для race tests. Версии Go/npm dependencies закреплены. Build script использует `GOTOOLCHAIN=go1.26.9`; для offline сборки заранее подготовить compiler и проверенный dependency cache.
+Требуются Linux, Go 1.26.10, Node.js 24.19.0, npm 11.9.0, Python 3, GNU tar/gzip, make и C compiler для race tests. Версии Go/npm dependencies закреплены. Build script использует `GOTOOLCHAIN=go1.26.10`; для offline сборки заранее подготовить compiler и проверенный dependency cache.
 
 В корне исходников:
 
@@ -117,7 +117,7 @@ Per-user limiter допускает 2 requests/sec и burst 120 на один п
 ## Документация и участие
 
 - [Оглавление документации](docs/README.md), [архитектура](docs/architecture.md), [API](docs/api.md), [приватность](docs/privacy.md).
-- [Эксплуатация](docs/operations.md), [тестирование](docs/testing.md), [релиз 1.1.3](docs/release-1.1.3.md), [security patch 1.1.1](docs/release-1.1.1.md), [готовность релиза](docs/release-readiness.md).
+- [Эксплуатация](docs/operations.md), [тестирование](docs/testing.md), [кандидат 1.1.4](docs/release-1.1.4.md), [релиз 1.1.3](docs/release-1.1.3.md), [готовность релиза](docs/release-readiness.md).
 - [Текущее оформление GitHub](docs/repository-review-2026-10-12.md), [процесс выпуска](docs/release-process.md), [участие в разработке](CONTRIBUTING.md), [CHANGELOG](CHANGELOG.md).
 
 Баги и предложения принимаются через [Issues](https://github.com/F1ourish/mattermost-plugin-seen/issues). Использовать synthetic data; credentials, реальные сообщения, viewers и production identifiers в публичные обращения не добавлять. Потенциальные уязвимости сообщать по [SECURITY.md](SECURITY.md).

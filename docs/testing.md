@@ -1,10 +1,12 @@
 # Тестирование и критерии приёмки
 
-Пакет 1.1.2, дата 12.10.2026. Различать CI/unit/mock проверки и live acceptance. Состояние кандидата - [release-readiness](release-readiness.md); фактический прогон привязывать к Actions run, commit и SHA256. [Отчёт 1.1.1](release-readiness-1.1.1.md) сохраняет исторические результаты.
+Кандидат 1.1.4, дата 30.10.2026. Различать CI/unit/mock проверки и live acceptance. Состояние кандидата - [release-readiness](release-readiness.md); фактический прогон привязывать к Actions run, commit и SHA256. [Отчёт 1.1.1](release-readiness-1.1.1.md) сохраняет исторические результаты.
+
+Для 1.1.4 дополнительно проверяется редактирование двух ссылок: добавление и повторное изменение описания при мягком переводе строки и BR. Абзац и кнопка Seen сохраняются, контейнер индикатора остаётся последним дочерним узлом, URL не меняются. После сложного блока используется attachment fallback; после замены Markdown индикатор присоединяется вновь. До исправления браузерная проверка конечной позиции падает. Live-проверка исходного сценария обязательна отдельно; дальнейшие ссылки на 1.1.2 ниже сохраняют историческую базовую матрицу.
 
 ## Локальные команды
 
-Выполнять в корне исходников на Linux, Go 1.26.9, Node 24.19.0, npm 11.9.0, Python 3, make и C compiler для race. Зависимости скачиваются из Go/npm registries; для offline build нужен заранее подготовленный проверенный cache и закреплённый compiler.
+Выполнять в корне исходников на Linux, Go 1.26.10, Node 24.19.0, npm 11.9.0, Python 3, make и C compiler для race. Зависимости скачиваются из Go/npm registries; для offline build нужен заранее подготовленный проверенный cache и закреплённый compiler.
 
 ```sh
 npm --prefix webapp ci --ignore-scripts
@@ -20,7 +22,7 @@ go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -show verbose ./server
 
 Назначение: unit/race/типизация/lint, dependency scan, browser mock. Ожидается exit 0; govulncheck читать полностью, включая module-only findings. В локальном прогоне используется явно заданный Chromium через CHROMIUM_PATH. Не подавлять ошибки сканера ради зелёного CI.
 
-`make dist` повторяет основные проверки и собирает Linux amd64/arm64 tar.gz. После сборки выполнить `make security-check`: module integrity, source scan, npm audit и binary scan обоих файлов непосредственно из архива. Для 1.1.2 дополнительно выполнить `python3 .github/release/check_package.py`: проверка manifest, docs/links, executable bits и совпадения runtime hashes с проверенным 1.1.1; отчёт создаётся в dist. Если распаковщик ZIP утратил executable bit scripts/build.sh или scripts/security-check.sh, восстановить `chmod +x scripts/build.sh scripts/security-check.sh`; при первом git commit проверить сохранение mode 100755. Скрипты в исходном ZIP имеют этот mode.
+`make dist` повторяет основные проверки и собирает Linux amd64/arm64 tar.gz. После сборки выполнить `make security-check`: module integrity, source scan, npm audit и binary scan обоих файлов непосредственно из архива. Затем выполнить `python3 .github/release/check_package.py`: проверка manifest, docs/links, executable bits и runtime hashes кандидата 1.1.4; отчёт создаётся в dist. Серверные hashes обновлены для Go 1.26.10/x/net 0.62.0 и не должны совпадать с 1.1.2/1.1.3. Если распаковщик ZIP утратил executable bit scripts/build.sh или scripts/security-check.sh, восстановить `chmod +x scripts/build.sh scripts/security-check.sh`; при первом git commit проверить сохранение mode 100755. Скрипты в исходном ZIP имеют этот mode.
 
 ## На тестовом Mattermost
 

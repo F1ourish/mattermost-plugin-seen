@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.4 - unreleased candidate
+
+- Keep the viewing indicator at the end of its paragraph after React replaces the message's own child nodes during an edit. Prepending a description to two newline-separated links could previously leave the indicator before the message text.
+- Add browser regression coverage for soft/hard line breaks, repeated edits, preservation of the paragraph and receipt control, and complex-block fallback.
+- Update the pinned release compiler to Go 1.26.10 for GO-2026-6809 and golang.org/x/net to 0.62.0 for GO-2026-6866/GO-2026-6860; regenerate module checksums and the compiled-dependency/license inventory. Both server binaries are rebuilt and receive new pinned hashes.
+- Update the transitive lint dependency Zod from 4.6.5 to 4.6.7 in the npm lockfile for GHSA-mrhx-c7xc-m3w5. It is a development dependency, not part of the shipped web bundle.
+- Preserve backend source, receipt data, first timestamps, Web/Desktop coverage and viewport collection behavior. This candidate is not automatically published.
+
 ## 1.1.3 - 2026-10-15
 
 - Add a persistent Web/Desktop-only scope note to the viewer preview and full list, including empty/loading/error states.
